@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Costco Stock Checker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <h1>Costco Stock Checker</h1>
+
+    <details id="settings" class="card">
+      <summary>Settings (one-time setup)</summary>
+      <label>
+        Proxy base URL (your Cloudflare Worker)
+        <input id="proxyUrl" type="text" placeholder="https://your-worker.your-subdomain.workers.dev">
+      </label>
+      <label>
+        Config source (raw GitHub URL to config.json)
+        <input id="configUrl" type="text" placeholder="https://raw.githubusercontent.com/USER/REPO/main/config.json">
+      </label>
+      <button id="saveSettings">Save & Load</button>
+      <p class="hint">Both are saved in this browser only (localStorage) — nothing is sent anywhere else.</p>
+    </details>
+
+    <div id="loadStatus" class="status"></div>
+
+    <div class="card" id="pickerCard" hidden>
+      <div class="columns">
+        <div>
+          <h2>Warehouses</h2>
+          <div id="warehouseList" class="checklist"></div>
+        </div>
+        <div>
+          <h2>Items</h2>
+          <input id="itemFilter" type="text" placeholder="Filter by name or SKU...">
+          <div id="itemList" class="checklist"></div>
+        </div>
+      </div>
+      <button id="checkBtn">Check Availability</button>
+      <span id="progress" class="hint"></span>
+    </div>
+
+    <table id="resultsTable" hidden>
+      <thead>
+        <tr><th>Item</th><th>Warehouse</th><th>Status</th></tr>
+      </thead>
+      <tbody id="resultsBody"></tbody>
+    </table>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
